@@ -3,6 +3,20 @@
 ![](./Jietu20170118-110306.jpg)
 
 ## uages
+* HTML
+```html
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title></title>
+        <meta http-equiv="" charset="utf-8">
+    </head>
+    <body style="margin:0;padding:0;">
+    <canvas id="c"></canvas>
+    </body> 
+    </html>
+```
+* JS 调用
 ```javascript
     var cc = {
         shadingColor: 'rgba(255,255,255,.25)',// 最底圆的颜色 // 渐变配置
