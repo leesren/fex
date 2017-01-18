@@ -89,3 +89,6 @@ h1{margin: 3em 0 1em;}
 }
 ```
 
+# canvas余弦波浪线 `sin-line.canvas.html`
+![](./Jietu20170118-143521.jpg)
+
