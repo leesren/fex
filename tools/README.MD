@@ -59,4 +59,33 @@
     </body>
     </html>
 ``` 
+* CSS
+```
+body{
+  margin:0;
+  overflow:hidden; 
+}
+canvas{
+	outline:1px solid red;
+	display:block;
+    margin:0 auto;
+  background:#333; 
+}
+h1, a {
+  color: Cornsilk;
+  font-family: serif;
+  font-style: italic;
+  font-size: 23px;
+  text-align: center;
+  font-weight: normal;
+}
+a{text-decoration:none;}
+h1{margin: 3em 0 1em;}
+
+.canvases{
+  //background:#333;
+  position:relative;
+  height:250px;
+}
+```
 
