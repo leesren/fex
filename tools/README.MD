@@ -1,4 +1,4 @@
-# canvas绘制圆形百分
+# 1.canvas绘制圆形百分 `percent-circle-canvas.js`
 ## DEMO
 ![](./Jietu20170118-110306.jpg)
 
@@ -33,3 +33,30 @@
     };
     draw('c', 85, ['200人', '50%'], cc);// 画布的宽高， 角度【计算圆】,
 ```
+
+# 2. canvas 绘制 sin 波浪 `sin-wave.canvas.js`
+
+## DEMO
+![](./Jietu20170118-142653.jpg)
+
+## uages
+* HTML
+```html
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    </head>
+    <body>
+    <p>Canvas sin wave</p>
+    <div class="canvases">
+        <canvas id = 'c'></canvas>
+        <canvas id = 'c2'></canvas>
+        <canvas id = 'c3'></canvas>
+    </div>
+    </body>
+    </html>
+``` 
+
