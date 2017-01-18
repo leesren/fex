@@ -1,6 +1,6 @@
 # canvas绘制圆形百分
 ## DEMO
-![](./Jietu20170118-105825.jpg)
+![](./Jietu20170118-110306.jpg)
 
 ## uages
 ```javascript
