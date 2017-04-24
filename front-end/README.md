@@ -50,7 +50,8 @@
 * [chrome 调试 ios webview ](http://www.jianshu.com/p/19c18c924f91) 注意需要xcode 版本大于8.0
 * xcode 打开 webview或者发送 http请求出现错误，先要设置 安全域
 
-# [解决transition动画与display冲突的几种方法](http://www.cnblogs.com/ihardcoder/p/3859026.html)
+# 解决transition动画与display冲突的几种方法
+[参考](http://www.cnblogs.com/ihardcoder/p/3859026.html)
 
 涉及到的原理是：元素要动画起作用，浏览器必须知道元素具体维度，就必须对这个元素重排(reflow),
 引起重排有很多方法，比如获取元素的size、clientHeight等，这样就会触发浏览器更新这个元素，引起重排。最后进行动画[参考](http://matheusazzi.com/animating-from-display-none-with-css-and-callbacks/)
@@ -68,4 +69,5 @@ CSS3动画对于`display:none` 的元素不起作用，对于`height:auto`和 `h
 1. 等待动画完成，然后隐藏 `display:none`
 2. 如果不需要移除元素（`display:none`）,可以使用 `opacity:0`、`visibility:hidden` 进行处理，但是元素依然占据文档空间
 
-# [前端缓存策略与基于Webpack的静态资源版本管理,Webpack中hash与chunkhash的区别，以及js与css的hash指纹解耦方案](http://www.cnblogs.com/ihardcoder/p/5623411.html)
+# 前端缓存策略与基于Webpack的静态资源版本管理,Webpack中hash与chunkhash的区别，以及js与css的hash指纹解耦方案
+[参考](http://www.cnblogs.com/ihardcoder/p/5623411.html)
