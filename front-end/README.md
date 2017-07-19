@@ -33,6 +33,7 @@
 * [脚本错误量极致优化-监控上报与Script error](https://github.com/joeyguo/blog/issues/13)
 * [脚本错误量极致优化-让脚本错误一目了然](https://github.com/joeyguo/blog/issues/14)
 * [构建可靠的前端异常监控服务-采集篇](http://jdc.jd.com/archives/2175)
+* [ES6 模块的导入方式引起打包合并文件大小的差异](https://lacke.mn/reduce-your-bundle-js-file-size/)
 
 # 视频播放 
 * [视频H5のVideo标签在微信里的坑和技巧](https://aotu.io/notes/2017/01/11/mobile-video/)
