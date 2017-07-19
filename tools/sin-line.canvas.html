@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <style>
+  body{
+  margin:0;
+  overflow:hidden;
+  background:#333;
+}
+canvas{
+	 height:314px;outline:1px solid red;
+	display:block; margin:0 auto;background:#333;
+}
+h1, a {
+  color: Cornsilk;
+  font-family: serif;
+  font-style: italic;
+  font-size: 23px;
+  text-align: center;
+  font-weight: normal;
+}
+a{text-decoration:none;}
+h1{margin: 3em 0 1em;}
+  </style>
+</head>
+
+<body>
+  <h1>Canvas sine wave</h1>
+  <canvas id='c'></canvas>
+  <script>
+    var c = document.getElementById("c");
+    var ctx = c.getContext("2d");
+    var cw = c.width = 314 * 2;
+    var ch = c.height = 314;
+    var rad = Math.PI / 180;// 弧度
+
+
+    var w = 314 * 8;// 水平点x的数量
+    var h = 120;// 波形高度
+    var amplitude = h;// 丰富度
+    var frequency = 0.016;// 波长 值越大 波长越短
+    var phi = 0;// y的偏移量
+    var frames = 0; // 移动的快慢
+    var stopped = true;
+    var lineWidth = 5;// 线的粗细
+    var speed = 60;
+
+    ctx.lineWidth = lineWidth;
+
+    function drawLine(offset, direction, sp, cycle) {
+      frames++;
+
+      phi = frames / 40;
+      waveHeight = amplitude / 4;
+      ctx.strokeStyle = "hsl(" + frames + ",100%,50%)";// 设置样式
+      for (var x = 0; x < w + cycle; x++) {
+
+        y = waveHeight * Math.sin(x * frequency + phi * direction) + waveHeight;
+        // y的坐标，和波形起始位置 如  sin( x + 30° ) 
+        ctx.lineTo(x, y + offset); // 40 = offset
+      }
+      ctx.stroke();
+    }
+
+    function Draw() {
+
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.beginPath();
+      drawLine(h * 3 / 4, 1, 80, 10);
+      requestId = window.requestAnimationFrame(Draw);
+    }
+    Draw(); 
+  </script>
+</body>
+
+</html>
