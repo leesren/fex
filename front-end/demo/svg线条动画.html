@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html,
+        body {
+            padding: 10px;
+        }
+
+        circle {
+            transition: all 0.3s;
+            stroke-dasharray: none
+        }
+
+        .box {
+            position: relative;
+            display: inline-block;
+        }
+
+        .box span {
+            font-size: 24px;
+            color: #19C2FF;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <svg width="400" height="400" style="background-color:white;outline:1px solid red">
+            <circle cx="200" cy="200" r="100" fill="none" stroke="none" stroke-width="6px" stroke-linejoin="null" stroke-linecap="round"></circle>
+        </svg>
+        <span>0%</span>
+    </div>
+    <input min="0" max="100" type="range" id="v" value="0">
+    <script>
+        var rangeEl = document.getElementById('v');
+        var circle = document.querySelector('circle');
+        var length = circle.getTotalLength();
+        var span = document.querySelector('span');
+        rangeEl.addEventListener('change', function (e) {
+            circle.style.transition = 'all 0.3s'
+            var num = e.target.value / 100 * length;
+            if (num === 0) {
+                circle.style.stroke = 'none';
+                circle.style.strokeDasharray = length;
+                circle.style.strokeDashoffset = length;
+                span.innerHTML = 0 + '%'
+                return;
+            }
+            console.log('num=%.2f,length=%d', num, length);
+            circle.style.strokeDasharray = length;
+            circle.style.stroke = '#19C2FF';
+            circle.style.strokeDashoffset = length - num;
+            span.innerHTML = e.target.value + '%'
+        })
+        circle.style.strokeDasharray = length;
+        circle.style.strokeDashoffset = length;
+    </script>
+</body>
+
+</html>

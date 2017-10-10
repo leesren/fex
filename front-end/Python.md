@@ -3,7 +3,7 @@
 ## 输入和输出
 ```python
 // 命令行输入 
-name = input()
+name = input() # python2.7 使用 name = raw_input('请输入：')，不然会报错 NameError: name 'sd' is not defined
 
 // 如果需要提示输入 
 name = input('这是输入提示')
@@ -15,6 +15,8 @@ print '输出内容' //
 print 'name=%s'%name`,多个数据使用元组, `print 'name=%s,age=%d'%(name,age)
 // 浮点数格式化 
 print 'sale=%.2f'
+
+
 ```
 
 ## 数据类型
@@ -25,7 +27,8 @@ print 'sale=%.2f'
 // 浮点数整除
 10//3 ==>3
 * 类型转换
-
+* 除数问题
+如果直接使用整数相除，会得到 0的情况，那么使用  `from __future__ import division` 解决除数问题
 
 ```
 * 字符串
@@ -182,6 +185,7 @@ nn = [m + n for m in 'ABC' for n in 'XYZ']
 2. BeautifulSoup – 低效HTML/ XML处理库，纯Python实现
 * 通用
 1. requests -网络库
+注意如果返回数据出现乱码，需要设置 response.encode = 相对应的编码集 如 `response.encoding = 'utf-8'`
 
 
 # Python 重点
@@ -190,7 +194,10 @@ nn = [m + n for m in 'ABC' for n in 'XYZ']
 这个类似于Node的多版本。常见的解决方式是使用`pyenv`[【参考】](http://www.cnblogs.com/linhan/p/4722480.html)进行垫片管理。本地local指定版本，全局不指定
 * 使用`pyenv`之后导致`pip`安装的路径总是指向系统的 模块路径，出现 `No module name xxx`
 那么需要在pyenv使用的环境中安装 `pip install xx` ,不能用全局的`bash` 安装 `pip`
-
+查看系统的所有Python版本 `pyenv versions`
+查看当前命令行的Python版本 `pyenv version`
+设置当前工程的Python版本 `pyenv local 版本号` 
+重启命令行 :`exec $SHELL`
 ## 使用`tornado` debug 模式，就可以跟`Node`一样即修改即呈现
 ```python
 application = tornado.web.Application([
@@ -199,3 +206,55 @@ application = tornado.web.Application([
 ```
 * python 的` MySQLdb` 驱动没有支持 python3.0 以上，所以安装
 `pip install PyMySQL`
+* pip 安装指定版本
+`pip install [package name]==version` 如: `pip install cairosvg==1.0.22`
+* python 版本判断
+```python
+import sys
+py2 = sys.version_info[0] == 2
+py3 = sys.version_info[0] == 3
+``
+
+## python 作用域
+1. 函数内部可以访问函数外部的变量，函数内部改变函数外部变量的值不会影响函数外部的值，存在作用域链，但是跟JS的原型链不一样
+2. python没有块级作用域的说法，for 函数没有产生局部作用域
+3. 变量必须是先定义再引用，不存在像JS一样存在作用域提升问题
+
+## python 常见的模块导入姿势
+1. 常规导入 `import sys`, `import sys,os` ,`import sys as system`
+2. 使用from 语句导入 `from functools import lru_cache`
+3. 相对导入, `.` 导入
+ 文件目录如下：
+ -- myproject
+        package1
+            __init__.py
+            module_x.py
+            module_y.py
+        package2
+            __init__.py
+        main.py
+a. `myproject/package1/__init__.py`
+```python
+from . import module_x
+from . import module_y
+```
+b. `myproject/package1/module_x.py`
+```python
+from .module_y import spam as ham
+
+def main():
+    ham()
+```
+
+c. `myproject/package1/module_y.py`
+```python
+def spam():
+    print('spam ' * 3)
+```
+
+d. `myproject/package1/main.py`
+```python
+import package1
+```
+4. 本地导入
+

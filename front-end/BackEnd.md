@@ -98,3 +98,13 @@ set password for rott@localhost=password('123456');
 * `mv` 移动文件到指定目录 如：`mv mysql-5.7.9 /usr/local/mysql`
 * `tar` 解压文件如： `tar zxvf mysql.tar.gz`
 
+## mysql 使用问题集锦
+* 创建唯一值
+创建唯一值得常见的有2中方式：[参考](http://www.studymysql.com/mysql/unique.html%20constraint)
+1. 创建主键primary key 【指定唯一，但是只能是单个列】，
+2. 创建唯一索引 unique index 【可以多个列】
+```sql
+CREATE UNIQUE INDEX index_name
+ON table_name(index_column_1,index_column_2,...);
+```
+

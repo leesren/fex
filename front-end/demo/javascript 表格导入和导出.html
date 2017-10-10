@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+  <link rel="stylesheet" type="text/css" href="http://docs.handsontable.com/pro/bower_components/handsontable-pro/dist/handsontable.full.min.css">
+  <link rel="stylesheet" type="text/css" href="http://handsontable.com/static/css/main.css">
+  <script src="http://docs.handsontable.com/pro/bower_components/handsontable-pro/dist/handsontable.full.min.js"></script>
+</head>
+
+<body>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.6/xlsx.full.min.js"></script>
+  <p>Please select an Excel file from your computer:</p>
+  <input type="file" id="file-object">
+  <div id="hot"></div>
+  <button id="save">save</button>
+  <div id="result"></div>
+  <script>
+    function log(v, t) {
+      console.log(!t ? v : JSON.stringify(v));
+    }
+    document.getElementById('file-object').addEventListener("change", function (e) {
+      var files = e.target.files, file;
+      if (!files || files.length == 0) return;
+      file = files[0];
+      var fileReader = new FileReader();
+      fileReader.onload = function (e) {
+        var filename = file.name;
+        // call 'xlsx' to read the file  
+        var binary = "";
+        var bytes = new Uint8Array(e.target.result);
+        var length = bytes.byteLength;
+        for (var i = 0; i < length; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        var oFile = XLSX.read(binary, { type: 'binary', cellDates: true, cellStyles: true });
+        var cells = JSON.stringify(oFile.Sheets);
+        var data = XLSX.utils.sheet_to_json(oFile['Sheets']['工作表1'], { header: 1 });
+
+        log(data);
+        showme(data);
+      };
+      fileReader.readAsArrayBuffer(file);
+    })
+
+    function showme(ss) {
+
+      var cc = ss || [["编号", "姓名", "年龄", "性别", "城市", "日期"], ["A00001", "张三", "45", "男", "北京", "12/4/15"], [null, "李四", "24", "女", "上海", "10/23/16"]];
+      function log(v, t) {
+        console.log(!t ? v : JSON.stringify(v));
+      }
+      var cellsObj = cc.slice(1);
+      var sheetHeader = cc.slice(0, 1)[0];
+      var list = [];
+
+      for (var i = 0; i < cellsObj.length; i++) {
+        var temp = {};
+        for (var j = 0; j < cellsObj[i].length; j++) {
+          temp[sheetHeader[j]] = cellsObj[i][j];
+        }
+        log(cellsObj[i], '2');
+        list.push(temp);
+      }
+
+      var hotElement = document.querySelector('#hot');
+      var hotElementContainer = hotElement.parentNode;
+      var hotSettings = {
+        data: list,
+        columns: [{
+          data: '编号',
+          type: 'text',
+          //numeric',
+          width: 40
+        },
+        {
+          data: '姓名',
+          //'currencyCode',
+          type: 'text'
+        },
+        {
+          data: '年龄',
+          //'currency',
+          type: 'numeric'
+        },
+        {
+          data: '性别',
+          //'level',
+          type: 'text',
+          //format: '0.0000'
+        },
+        {
+          data: '城市',
+          type: 'text'
+        },
+        {
+          data: '日期',
+          type: 'text'
+        }],
+        stretchH: 'all',
+        width: 806,
+        autoWrapRow: true,
+        height: 441,
+        maxRows: 22,
+        rowHeaders: true,
+        colHeaders: sheetHeader
+      };
+
+      var hot = new Handsontable(hotElement, hotSettings);
+
+      var $$ = function (id) {
+        return document.getElementById(id);
+      }
+
+      Handsontable.dom.addEvent($$('save'), 'click',
+        function () {
+          console.info('保存数据===>', hot.getData())
+        });
+      // 保存数据
+
+    }
+  </script>
+</body>
+
+</html>
